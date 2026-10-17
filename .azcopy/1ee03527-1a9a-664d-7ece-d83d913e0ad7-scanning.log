@@ -1,0 +1,24 @@
+2026/10/17 08:56:36 AzcopyVersion  10.32.3
+2026/10/17 08:56:36 OS-Environment  linux
+2026/10/17 08:56:36 OS-Architecture  amd64
+2026/10/17 08:56:36 Log times are in UTC. Local time is 17 Oct 2026 08:56:36
+2026/10/17 08:56:36 File .gitignore was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File README.md was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File eslint.config.js was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File index.html was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File package.json was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File vite.config.js was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File public/vite.svg was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File src/App.css was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File src/App.jsx was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File src/index.css was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File src/main.jsx was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File src/api/api.js was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File src/components/Button.jsx was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File src/components/Dashboard.jsx was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File src/components/Navbar.jsx was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File src/components/TaskList.jsx was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File src/components/TeamList.jsx was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File src/components/UserList.jsx was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File src/assets/react.svg was skipped because the source has an older LMT than the destination
+2026/10/17 08:56:36 File src/pages/Home.jsx was skipped because the source has an older LMT than the destination

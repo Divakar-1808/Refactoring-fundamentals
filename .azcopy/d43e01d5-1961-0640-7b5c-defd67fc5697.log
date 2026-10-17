@@ -1,0 +1,87 @@
+2026/10/17 08:52:49 AzcopyVersion  10.32.3
+2026/10/17 08:52:49 OS-Environment  linux
+2026/10/17 08:52:49 OS-Architecture  amd64
+2026/10/17 08:52:49 Log times are in UTC. Local time is 17 Oct 2026 08:52:49
+2026/10/17 08:52:49 ISO 8601 START TIME: to copy files that changed before or after this job started, use the parameter --include-before=2026-10-17T08:52:44Z or --include-after=2026-10-17T08:52:44Z
+2026/10/17 08:52:49 ==> REQUEST/RESPONSE (Try=1/9.33642ms, OpTime=73.387851ms) -- RESPONSE SUCCESSFULLY RECEIVED
+   HEAD https://aivagamprodlmsstorage.blob.core.windows.net/5e207226-2ebb-407a-9479-ae4f22e172ec/client?se=2026-10-17T09%3A02%3A46Z&sig=-REDACTED-&sp=rwdftlacupi&spr=https&srt=sco&ss=btqf&st=2026-10-17T08%3A51%3A46Z&sv=2025-05-05
+   X-Ms-Request-Id: [d4080c71-f01e-0005-0914-5e195f000000]
+
+2026/10/17 08:52:49 ==> REQUEST/RESPONSE (Try=1/4.057605ms, OpTime=4.095806ms) -- RESPONSE SUCCESSFULLY RECEIVED
+   GET https://aivagamprodlmsstorage.blob.core.windows.net/5e207226-2ebb-407a-9479-ae4f22e172ec?comp=list&maxresults=1&prefix=client%2F&restype=container&se=2026-10-17T09%3A02%3A46Z&sig=-REDACTED-&sp=rwdftlacupi&spr=https&srt=sco&ss=btqf&st=2026-10-17T08%3A51%3A46Z&sv=2025-05-05
+   X-Ms-Request-Id: [d4080c7a-f01e-0005-1014-5e195f000000]
+
+2026/10/17 08:52:49 Any empty folders will not be processed, because source and/or destination doesn't have full folder support
+2026/10/17 08:52:49 ==> REQUEST/RESPONSE (Try=1/3.382509ms, OpTime=3.604283ms) -- RESPONSE SUCCESSFULLY RECEIVED
+   HEAD https://aivagamprodlmsstorage.blob.core.windows.net/5e207226-2ebb-407a-9479-ae4f22e172ec/client?se=2026-10-17T09%3A02%3A46Z&sig=-REDACTED-&sp=rwdftlacupi&spr=https&srt=sco&ss=btqf&st=2026-10-17T08%3A51%3A46Z&sv=2025-05-05
+   X-Ms-Request-Id: [d4080c85-f01e-0005-1a14-5e195f000000]
+
+2026/10/17 08:52:49 ==> REQUEST/RESPONSE (Try=1/6.088485ms, OpTime=7.201454ms) -- RESPONSE SUCCESSFULLY RECEIVED
+   GET https://aivagamprodlmsstorage.blob.core.windows.net/5e207226-2ebb-407a-9479-ae4f22e172ec?comp=list&delimiter=%2F&include=metadata&prefix=client%2F&restype=container&se=2026-10-17T09%3A02%3A46Z&sig=-REDACTED-&sp=rwdftlacupi&spr=https&srt=sco&ss=btqf&st=2026-10-17T08%3A51%3A46Z&sv=2025-05-05
+   X-Ms-Request-Id: [d4080c87-f01e-0005-1c14-5e195f000000]
+
+2026/10/17 08:52:49 ==> REQUEST/RESPONSE (Try=1/5.700238ms, OpTime=5.726407ms) -- RESPONSE SUCCESSFULLY RECEIVED
+   GET https://aivagamprodlmsstorage.blob.core.windows.net/5e207226-2ebb-407a-9479-ae4f22e172ec?comp=list&delimiter=%2F&include=metadata&prefix=client%2Fsrc%2F&restype=container&se=2026-10-17T09%3A02%3A46Z&sig=-REDACTED-&sp=rwdftlacupi&spr=https&srt=sco&ss=btqf&st=2026-10-17T08%3A51%3A46Z&sv=2025-05-05
+   X-Ms-Request-Id: [d4080c8b-f01e-0005-1f14-5e195f000000]
+
+2026/10/17 08:52:49 ==> REQUEST/RESPONSE (Try=1/5.43293ms, OpTime=11.329665ms) -- RESPONSE SUCCESSFULLY RECEIVED
+   GET https://aivagamprodlmsstorage.blob.core.windows.net/5e207226-2ebb-407a-9479-ae4f22e172ec?comp=list&delimiter=%2F&include=metadata&prefix=client%2Fpublic%2F&restype=container&se=2026-10-17T09%3A02%3A46Z&sig=-REDACTED-&sp=rwdftlacupi&spr=https&srt=sco&ss=btqf&st=2026-10-17T08%3A51%3A46Z&sv=2025-05-05
+   X-Ms-Request-Id: [d4080c94-f01e-0005-2814-5e195f000000]
+
+2026/10/17 08:52:49 ==> REQUEST/RESPONSE (Try=1/6.88632ms, OpTime=12.481152ms) -- RESPONSE SUCCESSFULLY RECEIVED
+   GET https://aivagamprodlmsstorage.blob.core.windows.net/5e207226-2ebb-407a-9479-ae4f22e172ec?comp=list&delimiter=%2F&include=metadata&prefix=client%2Fsrc%2Fassets%2F&restype=container&se=2026-10-17T09%3A02%3A46Z&sig=-REDACTED-&sp=rwdftlacupi&spr=https&srt=sco&ss=btqf&st=2026-10-17T08%3A51%3A46Z&sv=2025-05-05
+   X-Ms-Request-Id: [d4080c96-f01e-0005-2a14-5e195f000000]
+
+2026/10/17 08:52:49 ==> REQUEST/RESPONSE (Try=1/6.079424ms, OpTime=18.463215ms) -- RESPONSE SUCCESSFULLY RECEIVED
+   GET https://aivagamprodlmsstorage.blob.core.windows.net/5e207226-2ebb-407a-9479-ae4f22e172ec?comp=list&delimiter=%2F&include=metadata&prefix=client%2Fsrc%2Fcomponents%2F&restype=container&se=2026-10-17T09%3A02%3A46Z&sig=-REDACTED-&sp=rwdftlacupi&spr=https&srt=sco&ss=btqf&st=2026-10-17T08%3A51%3A46Z&sv=2025-05-05
+   X-Ms-Request-Id: [d4080c9e-f01e-0005-3114-5e195f000000]
+
+2026/10/17 08:52:49 ==> REQUEST/RESPONSE (Try=1/4.949666ms, OpTime=33.073498ms) -- RESPONSE SUCCESSFULLY RECEIVED
+   GET https://aivagamprodlmsstorage.blob.core.windows.net/5e207226-2ebb-407a-9479-ae4f22e172ec?comp=list&delimiter=%2F&include=metadata&prefix=client%2Fsrc%2Fpages%2F&restype=container&se=2026-10-17T09%3A02%3A46Z&sig=-REDACTED-&sp=rwdftlacupi&spr=https&srt=sco&ss=btqf&st=2026-10-17T08%3A51%3A46Z&sv=2025-05-05
+   X-Ms-Request-Id: [d4080ca8-f01e-0005-3b14-5e195f000000]
+
+2026/10/17 08:52:49 ==> REQUEST/RESPONSE (Try=1/8.400386ms, OpTime=36.365731ms) -- RESPONSE SUCCESSFULLY RECEIVED
+   GET https://aivagamprodlmsstorage.blob.core.windows.net/5e207226-2ebb-407a-9479-ae4f22e172ec?comp=list&delimiter=%2F&include=metadata&prefix=client%2Fsrc%2Fapi%2F&restype=container&se=2026-10-17T09%3A02%3A46Z&sig=-REDACTED-&sp=rwdftlacupi&spr=https&srt=sco&ss=btqf&st=2026-10-17T08%3A51%3A46Z&sv=2025-05-05
+   X-Ms-Request-Id: [57cb7b86-c01e-0049-2614-5ede40000000]
+
+2026/10/17 08:52:49 Job-Command sync /home/aivagam_user/client https://aivagamprodlmsstorage.blob.core.windows.net/5e207226-2ebb-407a-9479-ae4f22e172ec/client?sv=2025-05-05&ss=btqf&srt=sco&spr=https&st=2026-10-17T08%3A51%3A46Z&se=2026-10-17T09%3A02%3A46Z&sp=rwdftlacupi&sig=-REDACTED- --delete-destination=true --exclude-path node_modules 
+2026/10/17 08:52:49 Number of CPUs: 1
+2026/10/17 08:52:49 Max file buffer RAM 0.500 GB
+2026/10/17 08:52:49 Max concurrent network operations: 32 (Based on number of CPUs. Set AZCOPY_CONCURRENCY_VALUE environment variable to override)
+2026/10/17 08:52:49 Check CPU usage when dynamically tuning concurrency: true (Based on hard-coded default. Set AZCOPY_TUNE_TO_CPU environment variable to true or false override)
+2026/10/17 08:52:49 Max concurrent transfer initiation routines: 64 (Based on hard-coded default. Set AZCOPY_CONCURRENT_FILES environment variable to override)
+2026/10/17 08:52:49 Max enumeration routines: 16 (Based on hard-coded default. Set AZCOPY_CONCURRENT_SCAN environment variable to override)
+2026/10/17 08:52:49 Parallelize getting file properties (file.Stat): false (Based on AZCOPY_PARALLEL_STAT_FILES environment variable)
+2026/10/17 08:52:49 Max open files when downloading: 1048152 (auto-computed)
+2026/10/17 08:52:49 No transfers were scheduled.
+2026/10/17 08:52:49 Final job part has been created
+2026/10/17 08:52:51 PERF: primary performance constraint is Unknown. States: X:  0, O:  0, M:  0, L:  0, R:  0, D:  0, W:  0, F:  0, B:  0, E:  0, T:  0, GRs: 32
+2026/10/17 08:52:51 100.0 %, 0 Done, 0 Failed, 0 Pending, 0 Total, 2-sec Throughput (Mb/s): 0
+2026/10/17 08:52:51 PERF: primary performance constraint is Unknown. States: X:  0, O:  0, M:  0, L:  0, R:  0, D:  0, W:  0, F:  0, B:  0, E:  0, T:  0, GRs: 32
+2026/10/17 08:52:51 
+Job d43e01d5-1961-0640-7b5c-defd67fc5697 Summary
+Files Scanned at Source: 20
+Files Scanned at Destination: 20
+Elapsed Time (Minutes): 0.0334
+Number of Copy Transfers for Files: 0
+Number of Copy Transfers for Folder Properties: 0
+Number of Symlink Transfers: 0
+Total Number of Copy Transfers: 0
+Number of Copy Transfers Completed: 0
+Number of Copy Transfers Failed: 0
+Number of Deletions at Destination: 0
+Number of Symbolic Links Skipped: 0
+Number of Special Files Skipped: 0
+Number of Hardlinks Converted: 0
+Number of Hardlinks Skipped: 0
+Total Number of Bytes Transferred: 0
+Total Number of Bytes Enumerated: 0
+Final Job Status: Completed
+
+Diagnostic stats:
+IOPS: 0
+End-to-end ms per request: 0
+Network Errors: 0.00%
+Server Busy: 0.00%
+
+2026/10/17 08:52:51 Closing Log

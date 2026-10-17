@@ -1,0 +1,24 @@
+2026/10/17 08:39:58 AzcopyVersion  10.32.3
+2026/10/17 08:39:58 OS-Environment  linux
+2026/10/17 08:39:58 OS-Architecture  amd64
+2026/10/17 08:39:58 Log times are in UTC. Local time is 17 Oct 2026 08:39:58
+2026/10/17 08:39:58 File .gitignore was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File README.md was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File eslint.config.js was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File index.html was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File package.json was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File vite.config.js was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File public/vite.svg was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File src/App.css was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File src/App.jsx was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File src/index.css was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File src/main.jsx was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File src/api/api.js was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File src/assets/react.svg was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File src/components/Button.jsx was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File src/components/Dashboard.jsx was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File src/components/Navbar.jsx was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File src/components/TaskList.jsx was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File src/components/TeamList.jsx was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File src/components/UserList.jsx was overwritten because the source is more recent than the destination
+2026/10/17 08:39:58 File src/pages/Home.jsx was overwritten because the source is more recent than the destination

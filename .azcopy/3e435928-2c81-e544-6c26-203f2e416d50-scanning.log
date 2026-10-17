@@ -1,0 +1,20 @@
+2026/10/17 08:47:09 AzcopyVersion  10.32.3
+2026/10/17 08:47:09 OS-Environment  linux
+2026/10/17 08:47:09 OS-Architecture  amd64
+2026/10/17 08:47:09 Log times are in UTC. Local time is 17 Oct 2026 08:47:09
+2026/10/17 08:47:09 File .env was skipped because the source has an older LMT than the destination
+2026/10/17 08:47:09 File .gitignore was skipped because the source has an older LMT than the destination
+2026/10/17 08:47:09 File doc.txt was skipped because the source has an older LMT than the destination
+2026/10/17 08:47:09 File package-lock.json was skipped because the source has an older LMT than the destination
+2026/10/17 08:47:09 File package.json was skipped because the source has an older LMT than the destination
+2026/10/17 08:47:09 File src/app.js was skipped because the source has an older LMT than the destination
+2026/10/17 08:47:09 File src/database/task_management.db was skipped because the source has an older LMT than the destination
+2026/10/17 08:47:09 File src/db/knex.js was skipped because the source has an older LMT than the destination
+2026/10/17 08:47:09 File src/db/migrations.js was skipped because the source has an older LMT than the destination
+2026/10/17 08:47:09 File src/models/task.js was skipped because the source has an older LMT than the destination
+2026/10/17 08:47:09 File src/models/team.js was skipped because the source has an older LMT than the destination
+2026/10/17 08:47:09 File src/models/user.js was skipped because the source has an older LMT than the destination
+2026/10/17 08:47:09 File src/controllers/TaskController.js was overwritten because the source is more recent than the destination
+2026/10/17 08:47:09 File src/controllers/TeamController.js was skipped because the source has an older LMT than the destination
+2026/10/17 08:47:09 File src/controllers/UserController.js was skipped because the source has an older LMT than the destination
+2026/10/17 08:47:09 File src/routes/index.js was skipped because the source has an older LMT than the destination

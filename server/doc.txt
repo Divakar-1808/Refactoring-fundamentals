@@ -1,0 +1,2939 @@
+i want to create a buggy application Task Management & Team Collaboration App covering all these modules and the concepts 
+
+I am going to create a guided refactoring lab in my e learning platform
+
+
+Introduction
+What This Lab Is About
+
+This lab is a hands-on refactoring lab built around a deliberately poorly structured but fully working application.
+
+The project is functionally correct — all features work as expected — but the codebase contains intentional design, structure, and safety issues spread across multiple layers of the system.
+
+These issues do not cause errors or failures.
+Instead, they silently increase:
+
+    Change risk
+
+    Bug probability
+
+    Development time
+
+    Long-term maintenance cost
+
+The goal of this lab is to identify, understand, and refactor those issues step by step, while preserving 100% of existing behavior.
+Nature of the Problems in This Lab
+
+The problems in this project are not bugs in the traditional sense.
+
+They are:
+
+    Ambiguous naming
+
+    Mixed responsibilities
+
+    Hidden business logic
+
+    Unsafe dependency direction
+
+    Tight coupling
+
+    Leaky abstractions
+
+    Scattered validation
+
+    Fragile APIs
+
+    Unprotected invariants
+
+Each issue looks reasonable in isolation, which is exactly why such code frequently reaches production systems.
+
+This lab focuses on exposing the long-term cost of these patterns.
+Why This Lab Is Important
+
+Most real-world systems:
+
+    Work correctly
+
+    Pass QA and functional tests
+
+    Ship on time
+
+Yet over time they become:
+
+    Hard to modify
+
+    Risky to extend
+
+    Expensive to maintain
+
+    Fragile under change
+
+Refactoring problems are dangerous because:
+
+    They compound over time
+
+    They slow down every future change
+
+    They increase bug rates without obvious failures
+
+    They often force rewrites if ignored too long
+
+This lab trains you to fix design problems early, when they are still cheap, safe, and incremental.
+How the Lab Is Structured
+
+The same working application is refactored layer by layer, moving through the system in a controlled sequence.
+
+The lab is divided into the following modules:
+
+    Module 1 — Code Quality & Readability Refactoring
+
+    Module 2 — Backend & API Refactoring (Node.js / Express)
+
+    Module 3 — SQL & Data Access Refactoring
+
+    Module 4 — Architectural & Dependency Refactoring
+
+    Module 5 — Safety & Change-Resilience Refactoring
+
+Each module focuses on a specific class of refactoring problems and demonstrates:
+
+    What the problem is
+
+    Why it increases risk
+
+    How it appears in production code
+
+    How to refactor it safely
+
+    What improves after the refactor
+
+    Why behavior remains unchanged
+
+What You Will Do in This Lab
+
+Throughout the lab, you will:
+
+    Start with working but risky code
+
+    Identify structural weaknesses
+
+    Understand why they are dangerous
+
+    Apply behavior-preserving refactors
+
+    Compare before vs after code
+
+Every refactor is small, intentional, and test-safe.
+What This Lab Is Not
+
+This lab is not:
+
+    A rewrite exercise
+
+    A design pattern catalog
+
+    A framework tutorial
+
+    A clean-code style guide
+
+    An opinionated architecture course
+
+Instead, it focuses on practical refactoring decisions that reduce risk in real production systems.
+Core Learning Objective
+
+The core objective of this lab is to teach one critical idea:
+
+    Refactoring is how you change code safely — not how you make it prettier.
+
+By the end of this lab, you should be able to:
+
+    Identify risky code even when it works
+
+    Predict change impact before modifying code
+
+    Reduce coupling without breaking behavior
+
+    Isolate business rules from infrastructure
+
+    Make systems easier to test and extend
+
+    Refactor confidently in production codebases
+
+How to Use This Lab
+
+This lab is designed to be followed sequentially.
+
+Each module builds on the previous one, showing how refactoring problems:
+
+    Originate in small code decisions
+
+    Spread across layers
+
+    Increase change cost over time
+
+    Can be reversed safely with discipline
+
+By completing all modules in order, you will gain a system-level understanding of refactoring, not just isolated techniques.
+
+
+and i have 5 modules 
+
+in this i want to create a one production working application with bad code 
+
+this bad code will be there in the coantainer 
+
+i will teach all the refactoring techniques and make them to change the code inside the bad code apllication and deploy them in vercel once after all the new refactoring changes done the application should still work the same as before only the code will be refactored when they deploy to vercel
+
+
+theses are the modules and steps 
+
+
+
+
+MODULE 1 — MICRO REFACTORING (Guided Hands-On Labs)
+
+    Invariant: Behavior must not change
+    Goal: Reduce cognitive load, improve change safety, and encode intent
+
+1️⃣ Rename to Encode Intent
+Problem (Before)
+
+    Function name gives no business meaning
+
+    Reader must inspect implementation to understand purpose
+
+Why Refactoring Is Needed
+
+Ambiguous names cause:
+
+    Incorrect reuse
+
+    Slower onboarding
+
+    Wrong future changes
+
+Before
+function process(data) {
+  return data.a * data.b;
+}
+After
+function calculateInvoiceTotal(invoice) {
+  return invoice.unitPrice * invoice.quantity;
+}
+Refactoring Technique
+
+Rename Method + Rename Parameters
+Optimization
+
+Human-time optimization (not runtime)
+Gain
+
+    Intent is explicit
+
+    Misuse becomes harder
+
+Outcome (Lab Verification)
+
+    Same return value
+
+    Tests unchanged
+
+    Code understandable without reading implementation
+
+there is no 2nd step make 3rd as 2nd step
+
+3️⃣ Replace Magic Number with Named Constant
+Problem (Before)
+
+    Business rule hidden inside numeric literal
+
+    Meaning not searchable or reusable
+
+Why Refactoring Is Needed
+
+Magic numbers create invisible coupling.
+Before
+if (user.status === 2) {
+  allowAccess();
+}
+After
+const USER_STATUS = {
+  ACTIVE: 2
+};
+
+if (user.status === USER_STATUS.ACTIVE) {
+  allowAccess();
+}
+Refactoring Technique
+
+Replace Magic Number with Constant
+Optimization
+
+Centralized rule definition
+Gain
+
+    Intent explicit
+
+    Status meaning reusable
+
+Outcome
+
+    Same access behavior
+
+    Safer future status changes
+
+4️⃣ Replace Magic String with Domain Constant
+Problem (Before)
+
+    String literal encodes business meaning
+
+    Typos cause silent bugs
+
+Why Refactoring Is Needed
+
+Strings lack compile-time safety and intent.
+Before
+if (order.type === 'P') {
+  applyDiscount(order);
+}
+After
+const ORDER_TYPE = {
+  PROMOTIONAL: 'P'
+};
+
+if (order.type === ORDER_TYPE.PROMOTIONAL) {
+  applyDiscount(order);
+}
+Refactoring Technique
+
+Replace Magic String
+Optimization
+
+Error prevention
+Gain
+
+    Reduced typo risk
+
+    Clear domain vocabulary
+
+Outcome
+
+    Same discount behavior
+
+    Safer refactors
+
+
+Step 3 and 4 can be combined to teach the same concept of not using magic values and defining the constant in a centralized manner instead
+
+
+5️⃣ Introduce Guard Clauses
+Problem (Before)
+
+    Deep nesting
+
+    Reader must mentally track state
+
+Why Refactoring Is Needed
+
+Nested conditionals hide edge cases and bugs.
+Before
+function placeOrder(order) {
+  if (order) {
+    if (order.items.length > 0) {
+      if (order.total > 0) {
+        save(order);
+      }
+    }
+  }
+}
+After
+function placeOrder(order) {
+  if (!order) return;
+  if (order.items.length === 0) return;
+  if (order.total <= 0) return;
+
+  save(order);
+}
+Refactoring Technique
+
+Replace Nested Conditionals with Guard Clauses
+Optimization
+
+Linear execution flow
+Gain
+
+    Easier reasoning
+
+    Fewer hidden bugs
+
+Outcome
+
+    Same save behavior
+
+    Lower complexity score
+
+
+6️⃣ Extract Method from Complex Expression
+Problem (Before)
+
+    Calculation logic embedded inline
+
+    No reusable or testable unit
+
+Why Refactoring Is Needed
+
+Inline complexity blocks reuse and testing.
+Before
+const total = cart.items.reduce(
+  (sum, i) => sum + i.price * i.qty,
+  0
+) * 1.18;
+After
+const total = calculateCartTotal(cart);
+
+function calculateCartTotal(cart) {
+  const subtotal = cart.items.reduce(
+    (sum, i) => sum + i.price * i.qty,
+    0
+  );
+  return subtotal * TAX_RATE;
+}
+Refactoring Technique
+
+Extract Method
+Optimization
+
+Logic isolation
+Gain
+
+    Reusable calculation
+
+    Testable function
+
+Outcome
+
+    Same numeric output
+
+    New unit test possible
+
+
+7️⃣ Inline Temporary Variable (Remove Noise)
+Problem (Before)
+
+    Temporary variable adds no meaning
+
+    Increases visual clutter
+
+Why Refactoring Is Needed
+
+Unnecessary variables slow comprehension.
+Before
+const isValid = user.age >= 18;
+if (isValid) {
+  allowAccess();
+}
+After
+if (user.age >= 18) {
+  allowAccess();
+}
+Refactoring Technique
+
+Inline Temporary Variable
+Optimization
+
+Visual clarity
+Gain
+
+    Fewer symbols to track
+
+    Faster reading
+
+Outcome
+
+    Same behavior
+
+    Cleaner logic
+
+
+8️⃣ Introduce Explaining Variable
+Problem (Before)
+
+    Complex condition unreadable
+
+    Hard to safely modify
+
+Why Refactoring Is Needed
+
+Complex expressions hide intent.
+Before
+if (user.age > 18 && user.country === 'IN' && user.active) {
+  approve(user);
+}
+After
+const isEligibleUser =
+  user.age > 18 &&
+  user.country === 'IN' &&
+  user.active;
+
+if (isEligibleUser) {
+  approve(user);
+}
+Refactoring Technique
+
+Introduce Explaining Variable
+Optimization
+
+Intent clarity
+Gain
+
+    Safer changes
+
+    Easier debugging
+
+Outcome
+
+    Same approval logic
+
+    Clear eligibility rule
+
+
+9️⃣ Replace Boolean Flag with Intent Method
+Problem (Before)
+
+    Boolean parameter hides meaning
+
+    Call site unclear
+
+Why Refactoring Is Needed
+
+Boolean flags cause misuse and confusion.
+Before
+sendEmail(user, true);
+After
+sendWelcomeEmail(user);
+Refactoring Technique
+
+Remove Boolean Flag Argument
+Optimization
+
+API clarity
+Gain
+
+    Clear intent
+
+    Fewer incorrect calls
+
+Outcome
+
+    Same email behavior
+
+    Self-documenting API
+
+
+
+🔟 Remove Dead Code
+Problem (Before)
+
+    Unused logic suggests false behavior
+
+    Misleads future engineers
+
+Why Refactoring Is Needed
+
+Dead code increases maintenance risk.
+Before
+function calculateTotal(order) {
+  const discount = getDiscount(order);
+  return order.amount;
+}
+After
+function calculateTotal(order) {
+  return order.amount;
+}
+Refactoring Technique
+
+Remove Dead Code
+Optimization
+
+Reduced mental overhead
+Gain
+
+    Accurate logic representation
+
+    Less confusion
+
+Outcome
+
+    Same result
+
+    Cleaner function
+
+
+
+MODULE 2 — BACKEND REFACTORING (Node.js / Express)
+
+    Invariant: API behavior must not change
+    Goal: Make backend code safer to modify, test, and extend
+    Context: Production-style Express + Service + Repository code
+
+
+1️⃣ Long Method → Extract Functions
+Problem (Before)
+
+    One function does many things
+
+    Hard to understand and risky to change
+
+    Debugging requires stepping through everything
+
+Why Refactoring Is Needed
+
+Long methods amplify change impact and hide responsibilities.
+Before
+async function processOrder(req, res) {
+  const user = await User.findById(req.body.userId);
+  if (!user) return res.status(404).send();
+
+  if (user.balance < req.body.amount) {
+    return res.status(400).json({ error: 'Insufficient balance' });
+  }
+
+  user.balance -= req.body.amount;
+  await user.save();
+
+  await Order.create({
+    userId: user.id,
+    amount: req.body.amount
+  });
+
+  res.json({ success: true });
+}
+After
+async function processOrder(req, res) {
+  const user = await getUser(req.body.userId);
+  validateBalance(user, req.body.amount);
+  await debitUser(user, req.body.amount);
+  await createOrder(user.id, req.body.amount);
+  res.json({ success: true });
+}
+Refactoring Technique
+
+Extract Method
+Optimization
+
+Responsibility isolation
+Gain
+
+    Each function has one reason to change
+
+    Easier debugging
+
+Outcome
+
+    Same API response
+
+    Reduced cyclomatic complexity
+
+
+2️⃣ Fat Controller → Service Layer
+Problem (Before)
+
+    Controller handles business rules
+
+    Tight coupling to HTTP layer
+
+Why Refactoring Is Needed
+
+Business logic should not depend on Express.
+Before
+router.post('/users', async (req, res) => {
+  const hashed = await bcrypt.hash(req.body.password, 10);
+  const user = await User.create({
+    ...req.body,
+    password: hashed
+  });
+  sendWelcomeEmail(user.email);
+  res.json(user);
+});
+After
+router.post('/users', async (req, res) => {
+  const user = await userService.createUser(req.body);
+  res.json(user);
+});
+class UserService {
+  async createUser(data) {
+    const hashed = await bcrypt.hash(data.password, 10);
+    const user = await User.create({ ...data, password: hashed });
+    sendWelcomeEmail(user.email);
+    return user;
+  }
+}
+Refactoring Technique
+
+Move Method + Extract Service
+Optimization
+
+Layer separation
+Gain
+
+    Controllers become orchestration only
+
+    Logic reusable from jobs/CLI
+
+Outcome
+
+    Same API response
+
+    Service testable without HTTP
+
+
+3️⃣ Duplicate Validation Logic → Shared Validator
+Problem (Before)
+
+    Same validation repeated in multiple routes
+
+    Easy to miss updates
+
+Why Refactoring Is Needed
+
+Duplication causes inconsistency bugs.
+Before
+if (!req.body.email) {
+  return res.status(400).send('Email required');
+}
+After
+validateUserInput(req.body);
+
+function validateUserInput(data) {
+  if (!data.email) {
+    throw new Error('Email required');
+  }
+}
+Refactoring Technique
+
+Extract Method
+Optimization
+
+Single validation source
+Gain
+
+    Centralized rules
+
+    Easier updates
+
+Outcome
+
+    Same validation behavior
+
+    Reduced duplication count
+
+
+4️⃣ Inline SQL → Repository Abstraction
+Problem (Before)
+
+    SQL mixed with business logic
+
+    Schema changes affect many files
+
+Why Refactoring Is Needed
+
+Persistence logic must be isolated.
+Before
+await db.query(
+  'SELECT * FROM users WHERE id=?',
+  [userId]
+);
+After
+await userRepository.findById(userId);
+function findById(id) {
+  return db.query(
+    'SELECT * FROM users WHERE id=?',
+    [id]
+  );
+}
+Refactoring Technique
+
+Extract Repository
+Optimization
+
+Persistence isolation
+Gain
+
+    Queries named by intent
+
+    Safer schema evolution
+
+Outcome
+
+    Same data returned
+
+    Fewer SQL strings in app layer
+
+
+Not sure this Business Rule Embedded in Controller → Domain Method will be useful for the backend written in NodeJS as usually classes and methods are not used frequently. Review once do not include this step at all 
+
+5️⃣ Business Rule Embedded in Controller → Domain Method
+Problem (Before)
+
+    Rule logic duplicated across endpoints
+
+Why Refactoring Is Needed
+
+Rules must have a single owner.
+Before
+if (user.balance < amount) {
+  throw new Error('Insufficient balance');
+}
+After
+user.ensureSufficientBalance(amount);
+class User {
+  ensureSufficientBalance(amount) {
+    if (this.balance < amount) {
+      throw new Error('Insufficient balance');
+    }
+  }
+}
+Refactoring Technique
+
+Move Method to Domain Object
+Optimization
+
+Encapsulation
+Gain
+
+    Rule reusable
+
+    Clear domain language
+
+Outcome
+
+    Same rejection behavior
+
+    Domain logic testable
+
+
+
+6️⃣ Conditional Explosion → Policy Map
+Problem (Before)
+
+    Multiple if/else rules
+
+    Hard to add new cases
+
+Why Refactoring Is Needed
+
+Conditionals violate open–closed principle.
+Before
+function calculateDiscount(type, amount) {
+  if (type === 'A') return amount * 0.1;
+  if (type === 'B') return amount * 0.2;
+  return 0;
+}
+After
+const discountPolicy = {
+  A: a => a * 0.1,
+  B: a => a * 0.2
+};
+
+function calculateDiscount(type, amount) {
+  return discountPolicy[type]?.(amount) ?? 0;
+}
+Refactoring Technique
+
+Replace Conditional with Lookup Table
+Optimization
+
+Extensibility
+Gain
+
+    No modification for new types
+
+    Cleaner logic
+
+Outcome
+
+    Same discounts
+
+    Safer future changes
+
+
+7️⃣ Async Chain → async/await
+Problem (Before)
+
+    Nested promises
+
+    Error handling fragmented
+
+Why Refactoring Is Needed
+
+Async bugs are hard to trace.
+Before
+db.query(sql)
+  .then(r => db.query(otherSql, r.id))
+  .then(() => res.send('ok'))
+  .catch(err => res.status(500).send(err));
+After
+try {
+  const r = await db.query(sql);
+  await db.query(otherSql, r.id);
+  res.send('ok');
+} catch (err) {
+  next(err);
+}
+Refactoring Technique
+
+Replace Promise Chain with async/await
+Optimization
+
+Linear control flow
+Gain
+
+    Single error path
+
+    Easier debugging
+
+Outcome
+
+    Same responses
+
+    Fewer async bugs
+
+
+8️⃣ Hard-Coded Dependency → Dependency Injection
+Problem (Before)
+
+    Service tightly coupled to implementation
+
+Why Refactoring Is Needed
+
+Tight coupling blocks testing and replacement.
+Before
+const emailService = new SmtpService();
+emailService.send(msg);
+After
+class OrderService {
+  constructor(emailService) {
+    this.emailService = emailService;
+  }
+}
+Refactoring Technique
+
+Introduce Dependency Injection
+Optimization
+
+Replaceability
+Gain
+
+    Easier mocking
+
+    Looser coupling
+
+Outcome
+
+    Same emails sent
+
+    Service unit-testable
+
+
+9️⃣ Error Handling Scattered → Central Middleware
+Problem (Before)
+
+    Repeated try/catch blocks
+
+    Inconsistent error responses
+
+Why Refactoring Is Needed
+
+Error handling should be centralized.
+Before
+try {
+  throw new Error('Fail');
+} catch (e) {
+  res.status(500).send(e.message);
+}
+After
+throw new Error('Fail');
+app.use((err, req, res, next) => {
+  res.status(500).json({ error: err.message });
+});
+Refactoring Technique
+
+Extract Error Handling
+Optimization
+
+Consistency
+Gain
+
+    Uniform error responses
+
+    Less boilerplate
+
+Outcome
+
+    Same HTTP status
+
+    Cleaner route handlers
+
+
+🔟 Controller → Application Service → Domain → Repository
+Problem (Before)
+
+    Direct Controller → DB access
+
+    No clear boundaries
+
+Why Refactoring Is Needed
+
+Architecture must absorb change safely.
+Before
+router.post('/pay', async (req, res) => {
+  await db.query('UPDATE users SET balance=balance-? WHERE id=?', [
+    req.body.amount,
+    req.body.userId
+  ]);
+});
+After
+router.post('/pay', async (req, res) => {
+  await paymentService.pay(req.body);
+});
+class PaymentService {
+  async pay(cmd) {
+    const user = await this.userRepo.findById(cmd.userId);
+    user.debit(cmd.amount);
+    await this.userRepo.save(user);
+  }
+}
+Refactoring Technique
+
+Introduce Layered Architecture
+Optimization
+
+Dependency direction correction
+Gain
+
+    Predictable change impact
+
+    Replaceable infrastructure
+
+Outcome
+
+    Same payment behavior
+
+    Clean dependency graph
+
+
+1️⃣1️⃣ API Input Normalization
+Problem (Before)
+
+    Controllers directly parse and mutate req.body
+
+    Input sanitization logic duplicated across endpoints
+
+    Errors thrown in different formats
+
+    Each controller manually maps errors to HTTP responses
+
+    API boundary is fragile and inconsistent
+
+Why Refactoring Is Needed
+
+The API boundary is the highest-risk change surface.
+
+Without a stable boundary:
+
+    Small input changes cause regressions
+
+    Error handling becomes inconsistent
+
+    Adding validation multiplies changes across controllers
+
+    Behavior becomes hard to reason about
+
+Before (Code)
+router.post('/order', async (req, res) => {
+  try {
+    const amount = Number(req.body.amount);
+    const userId = req.body.userId;
+
+    if (!userId || amount <= 0) {
+      return res.status(400).json({ error: 'Invalid input' });
+    }
+
+    await orderService.placeOrder({ userId, amount });
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+Problems in the Old Version
+
+    Input parsing mixed with HTTP logic
+
+    Validation duplicated per endpoint
+
+    Error mapping inconsistent
+
+    Controllers do too much
+
+After (Code)
+router.post('/order', async (req, res) => {
+  try {
+    const command = normalizeOrderRequest(req.body);
+    await orderService.placeOrder(command);
+    res.json({ success: true });
+  } catch (e) {
+    res.status(mapErrorToStatus(e)).json({ error: e.message });
+  }
+});
+Normalization Layer
+function normalizeOrderRequest(body) {
+  return {
+    userId: String(body.userId),
+    amount: Number(body.amount)
+  };
+}
+Centralized Error Mapping
+function mapErrorToStatus(error) {
+  if (error instanceof ValidationError) return 400;
+  if (error instanceof NotFoundError) return 404;
+  return 500;
+}
+Refactoring Technique
+
+    Introduce API Boundary Layer
+
+    Input Normalization
+
+    Domain Error Mapping
+
+    Separation of HTTP concerns from business logic
+
+Optimization
+
+    Dependency inversion at API boundary
+
+    Single source of truth for:
+
+        Input sanitization
+
+        Error → HTTP mapping
+
+    Reduced controller responsibilities
+
+Gain
+
+    Cleaner controllers
+
+    Predictable error behavior
+
+    Centralized validation
+
+    Reduced duplication
+
+    Safer future API evolution
+
+Outcome
+
+    Same request payload
+
+    Same API responses
+
+    Same status codes
+
+    Same business behavior
+
+    More stable API boundary
+
+
+MODULE 3 — REACT REFACTORING (UI STABILITY & CHANGE SAFETY)
+
+    Invariant: UI output and behavior must not change
+    Goal: Make UI logic easier to change, test, and reason about
+    Context: React (hooks, components, state, effects)
+
+
+1️⃣ Feature Blob Component → Hook + View
+Problem (Before)
+
+    Component does data fetching, calculations, and rendering
+
+    Any change risks breaking UI
+
+Why Refactoring Is Needed
+
+Feature blob components amplify change and prevent reuse.
+Before
+function Dashboard() {
+  const [orders, setOrders] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    fetch('/api/orders')
+      .then(r => r.json())
+      .then(data => {
+        setOrders(data);
+        setTotal(data.reduce((s, o) => s + o.amount, 0));
+      });
+  }, []);
+
+  return (
+    <>
+      <h1>{total}</h1>
+      {orders.map(o => (
+        <div key={o.id}>{o.amount}</div>
+      ))}
+    </>
+  );
+}
+After
+function Dashboard() {
+  const { orders, total } = useOrders();
+  return <OrderView orders={orders} total={total} />;
+}
+function useOrders() {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/orders')
+      .then(r => r.json())
+      .then(setOrders);
+  }, []);
+
+  const total = orders.reduce((s, o) => s + o.amount, 0);
+  return { orders, total };
+}
+Refactoring Technique
+
+Extract Hook + Extract Component
+Optimization
+
+Separation of decisions from display
+Gain
+
+    Logic reusable
+
+    UI simpler
+
+Outcome
+
+    Same UI output
+
+    Predictable re-renders
+
+
+2️⃣ Derived State → Computed Value
+Problem (Before)
+
+    State duplicated from props or other state
+
+    Risk of desynchronization bugs
+
+Why Refactoring Is Needed
+
+Derived state creates invisible timing issues.
+Before
+const [total, setTotal] = useState(0);
+
+useEffect(() => {
+  setTotal(calcTotal(orders));
+}, [orders]);
+After
+const total = calcTotal(orders);
+Refactoring Technique
+
+Remove Derived State
+Optimization
+
+Single source of truth
+Gain
+
+    No sync bugs
+
+    Fewer renders
+
+Outcome
+
+    Same total displayed
+
+    More predictable behavior
+
+
+3️⃣ Prop Drilling → Context Refactor
+Problem (Before)
+
+    Same props passed through many layers
+
+    Hard to change component tree
+
+Why Refactoring Is Needed
+
+Prop drilling couples unrelated components.
+Before
+<App user={user}>
+  <Page user={user}>
+    <Header user={user} />
+  </Page>
+</App>
+After
+<UserContext.Provider value={user}>
+  <App />
+</UserContext.Provider>
+const user = useContext(UserContext);
+Refactoring Technique
+
+Introduce Context
+Optimization
+
+Dependency localization
+Gain
+
+    Cleaner component APIs
+
+    Easier tree refactors
+
+Outcome
+
+    Same UI
+
+    Fewer prop changes on edits
+
+
+4️⃣ Large Component → Container + Presentational
+Problem (Before)
+
+    UI and logic mixed
+
+    Testing requires browser environment
+
+Why Refactoring Is Needed
+
+Presentation and decisions evolve at different rates.
+Before
+function UserList({ users }) {
+  const active = users.filter(u => u.active);
+  return active.map(u => <div>{u.name}</div>);
+}
+After
+function UserListContainer({ users }) {
+  const active = users.filter(u => u.active);
+  return <UserListView users={active} />;
+}
+Refactoring Technique
+
+Split Container / Presentational
+Optimization
+
+Responsibility isolation
+Gain
+
+    UI testable with plain props
+
+    Logic reusable
+
+Outcome
+
+    Same rendered list
+
+    Smaller diffs
+
+
+5️⃣ Conditional Rendering Explosion → Mapping
+Problem (Before)
+
+    Many if/else blocks
+
+    Adding new case risky
+
+Why Refactoring Is Needed
+
+Conditional UI logic does not scale.
+Before
+if (status === 'loading') return <Spinner />;
+if (status === 'error') return <Error />;
+if (status === 'success') return <Data />;
+After
+const views = {
+  loading: <Spinner />,
+  error: <Error />,
+  success: <Data />
+};
+
+return views[status];
+Refactoring Technique
+
+Replace Conditional with Lookup Map
+Optimization
+
+Extensibility
+Gain
+
+    Easy to add new states
+
+    Cleaner render logic
+
+Outcome
+
+    Same UI per state
+
+    Safer future changes
+
+
+6️⃣ Side Effects in Render → useEffect
+Problem (Before)
+
+    Side effects inside render body
+
+    Causes infinite loops or warnings
+
+Why Refactoring Is Needed
+
+Render must be pure.
+Before
+if (count > 10) {
+  alert('Too high');
+}
+After
+useEffect(() => {
+  if (count > 10) alert('Too high');
+}, [count]);
+Refactoring Technique
+
+Move Side Effect to useEffect
+Optimization
+
+Render purity
+Gain
+
+    Predictable renders
+
+    No React warnings
+
+Outcome
+
+    Same alert behavior
+
+    Stable rendering
+
+
+7️⃣ Inline Logic in JSX → Extract Function
+Problem (Before)
+
+    JSX cluttered with logic
+
+    Hard to scan UI
+
+Why Refactoring Is Needed
+
+JSX should express structure, not logic.
+Before
+<span>{user.age > 18 ? 'Adult' : 'Minor'}</span>
+After
+<span>{getUserLabel(user)}</span>
+function getUserLabel(user) {
+  return user.age > 18 ? 'Adult' : 'Minor';
+}
+Refactoring Technique
+
+Extract Method
+Optimization
+
+Readability
+Gain
+
+    Clear intent
+
+    Easier change
+
+Outcome
+
+    Same label
+
+    Cleaner JSX
+
+
+8️⃣ Multiple useState → useReducer
+Problem (Before)
+
+    Many related state variables
+
+    Update logic scattered
+
+Why Refactoring Is Needed
+
+Related state should change together.
+Before
+const [loading, setLoading] = useState(false);
+const [data, setData] = useState(null);
+const [error, setError] = useState(null);
+After
+const [state, dispatch] = useReducer(reducer, initialState);
+Refactoring Technique
+
+Replace useState with useReducer
+Optimization
+
+State coherence
+Gain
+
+    Explicit transitions
+
+    Fewer bugs
+
+Outcome
+
+    Same UI behavior
+
+    Easier reasoning
+
+
+9️⃣ Repeated Fetch Logic → Custom Hook
+Problem (Before)
+
+    Same fetch logic duplicated
+
+    Inconsistent error handling
+
+Why Refactoring Is Needed
+
+Duplication causes drift.
+Before
+useEffect(() => {
+  fetch(url).then(setData);
+}, []);
+After
+const { data, loading } = useFetch(url);
+Refactoring Technique
+
+Extract Custom Hook
+Optimization
+
+Reuse
+Gain
+
+    Consistent behavior
+
+    Easier maintenance
+
+Outcome
+
+    Same data rendered
+
+    Unified fetch behavior
+
+
+🔟 Hard-Coded Values → Semantic Props
+Problem (Before)
+
+    Magic values in UI
+
+    Meaning unclear
+
+Why Refactoring Is Needed
+
+UI intent must be explicit.
+Before
+<Button size={3} />
+After
+<Button size="large" />
+Refactoring Technique
+
+Replace Magic Values
+Optimization
+
+Semantic clarity
+Gain
+
+    Easier understanding
+
+    Safer changes
+
+Outcome
+
+    Same visual size
+
+    More readable JSX
+
+
+MODULE 4 — SQL & DATABASE REFACTORING (PERFORMANCE & CHANGE SAFETY)
+
+    Invariant: Query results must remain identical
+    Goal: Reduce data coupling, duplication, and latency
+    Scope: SQL, repositories, ORM / query builders, MySQL
+
+1️⃣ SQL Duplication → Query Abstraction
+Problem (Before)
+
+Same SQL query duplicated across services.
+Why Refactoring Is Needed
+
+Schema change forces edits in many places → high blast radius.
+Before
+db.query("SELECT * FROM users WHERE status='active'");
+db.query("SELECT * FROM users WHERE status='active'");
+After
+userRepository.findActiveUsers();
+Refactoring Technique
+
+Introduce Repository Method
+Optimization
+
+Centralized ownership
+Gain
+
+    Single point of change
+
+    Clear intent
+
+Outcome
+
+    Same rows returned
+
+    Safer schema evolution
+
+
+2️⃣ N+1 Queries → JOIN Refactor
+Problem (Before)
+
+One query per parent record.
+Why Refactoring Is Needed
+
+Latency grows linearly with data size.
+Before
+SELECT * FROM users;
+SELECT * FROM orders WHERE user_id = ?;
+After
+SELECT u.*, o.*
+FROM users u
+LEFT JOIN orders o ON o.user_id = u.id;
+Refactoring Technique
+
+Replace N+1 with JOIN
+Optimization
+
+Reduced DB round trips
+Gain
+
+    Faster response
+
+    Predictable performance
+
+Outcome
+
+    Same response structure
+
+    Lower latency
+
+
+3️⃣ Business Logic in SQL → Domain Logic
+Problem (Before)
+
+Business rules embedded in SQL.
+Why Refactoring Is Needed
+
+SQL is hard to test and change.
+Before
+UPDATE users SET tier =
+  CASE WHEN spent > 10000 THEN 'gold' ELSE 'silver' END;
+After
+const tier = tierService.calculate(spent);
+userRepository.updateTier(id, tier);
+Refactoring Technique
+
+Move Logic to Domain Layer
+Optimization
+
+Separation of concerns
+Gain
+
+    Testable logic
+
+    Clear rule ownership
+
+Outcome
+
+    Same tier values
+
+    Safer rule changes
+
+
+4️⃣ SELECT * → Explicit Columns
+Problem (Before)
+
+Queries depend on entire table shape.
+Why Refactoring Is Needed
+
+Adding columns can silently break code.
+Before
+SELECT * FROM users;
+After
+SELECT id, name, email FROM users;
+Refactoring Technique
+
+Replace Wildcard Select
+Optimization
+
+Reduced coupling
+Gain
+
+    Predictable query output
+
+    Better performance
+
+Outcome
+
+    Same used data
+
+    Safer schema changes
+
+
+5️⃣ Dynamic SQL Strings → Parameterized Queries
+Problem (Before)
+
+SQL built via string concatenation.
+Why Refactoring Is Needed
+
+Security risk and query plan instability.
+Before
+db.query("SELECT * FROM users WHERE id=" + userId);
+After
+db.query("SELECT * FROM users WHERE id=?", [userId]);
+Refactoring Technique
+
+Introduce Parameter Binding
+Optimization
+
+Security & performance
+Gain
+
+    SQL injection prevention
+
+    Query plan reuse
+
+Outcome
+
+    Same row returned
+
+    Secure execution
+
+6️⃣ Multiple Updates → Transaction Boundary
+Problem (Before)
+
+Multiple related updates without transaction.
+Why Refactoring Is Needed
+
+Partial failure corrupts data.
+Before
+updateOrder();
+updateInventory();
+After
+db.transaction(() => {
+  updateOrder();
+  updateInventory();
+});
+Refactoring Technique
+
+Introduce Transaction
+Optimization
+
+Atomicity
+Gain
+
+    Data consistency
+
+    Safe failure recovery
+
+Outcome
+
+    Same final data
+
+    No partial writes
+
+
+7️⃣ Hard-Coded SQL Everywhere → Query Ownership
+Problem (Before)
+
+SQL scattered across controllers and services.
+Why Refactoring Is Needed
+
+No clear owner → fragile changes.
+Before
+controller.js
+service.js
+helper.js
+After
+orderRepository.js
+Refactoring Technique
+
+Move Queries to Repository Layer
+Optimization
+
+Encapsulation
+Gain
+
+    Central query management
+
+    Easier refactoring
+
+Outcome
+
+    Same DB behavior
+
+    Clear responsibility
+
+
+8️⃣ Inefficient Filtering → Push to SQL
+Problem (Before)
+
+Filtering done in application code.
+Why Refactoring Is Needed
+
+Unnecessary data transfer.
+Before
+const users = await db.query("SELECT * FROM users");
+return users.filter(u => u.active);
+After
+SELECT * FROM users WHERE active = 1;
+Refactoring Technique
+
+Push Filter to Database
+Optimization
+
+Data volume reduction
+Gain
+
+    Faster queries
+
+    Less memory usage
+
+Outcome
+
+    Same filtered results
+
+    Better performance
+
+
+9️⃣ Schema Change Impact → Backward-Compatible Query
+Problem (Before)
+
+Renaming column breaks existing code.
+Why Refactoring Is Needed
+
+Live systems need gradual migration.
+Before
+SELECT full_name FROM users;
+After
+SELECT full_name AS name FROM users;
+Refactoring Technique
+
+Introduce Compatibility Alias
+Optimization
+
+Incremental migration
+Gain
+
+    Zero downtime changes
+
+    Safe rollout
+
+Outcome
+
+    Same API response
+
+    No breaking change
+
+
+🔟 Unbounded Queries → Pagination Refactor
+Problem (Before)
+
+Queries return entire tables.
+Why Refactoring Is Needed
+
+Memory and latency risk.
+Before
+SELECT * FROM orders;
+After
+SELECT * FROM orders LIMIT 50 OFFSET 0;
+Refactoring Technique
+
+Introduce Pagination
+Optimization
+
+Controlled data flow
+Gain
+
+    Predictable performance
+
+    Safer scaling
+
+Outcome
+
+    Same rows per page
+
+    Stable memory usage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*******************************************
+
+MODULE 5 — SAFETY REFACTORING (NON-NEGOTIABLE)
+
+    Invariant: Behavior must not change
+    Goal: Make refactoring safe before making it clean
+    Reality: Legacy code, missing tests, production pressure
+
+
+Teaching 1️⃣ No Tests on Legacy Code → Characterization Test testing with test functions are hard in NodeIDE view. Review once 
+
+
+1️⃣ No Tests on Legacy Code → Characterization Test
+Problem (Before)
+
+Legacy function has unknown behavior.
+Why Refactoring Is Needed
+
+Refactoring without knowing behavior is dangerous.
+Before
+function legacyPrice(order) {
+  if (order.vip) return order.amount * 0.8;
+  if (order.amount > 1000) return order.amount * 0.9;
+  return order.amount;
+}
+After
+test('legacyPrice behavior snapshot', () => {
+  expect(legacyPrice({ vip: true, amount: 100 }))
+    .toBe(80);
+});
+Refactoring Technique
+
+Characterization Testing
+Optimization
+
+Freeze behavior before change
+Gain
+
+    Confidence to refactor
+
+    No behavior guessing
+
+Outcome
+
+    Same outputs guaranteed
+
+    Safe starting point
+
+
+2️⃣ Risky Logic Change → Feature Flag
+Problem (Before)
+
+New logic replaces old logic directly.
+Why Refactoring Is Needed
+
+Rollback becomes difficult.
+Before
+return newPricing(order);
+After
+if (flags.useNewPricing) {
+  return newPricing(order);
+}
+return legacyPricing(order);
+Refactoring Technique
+
+Introduce Feature Flag
+Optimization
+
+Controlled rollout
+Gain
+
+    Instant rollback
+
+    Safer production deploys
+
+Outcome
+
+    Same default behavior
+
+    Optional new path
+
+
+3️⃣ Hard Dependency → Seam Introduction
+Problem (Before)
+
+Code directly depends on external service.
+Why Refactoring Is Needed
+
+Cannot test or isolate behavior.
+Before
+const rate = paymentGateway.getRate();
+After
+function calculate(rateProvider) {
+  const rate = rateProvider.getRate();
+}
+Refactoring Technique
+
+Introduce Seam (Dependency Injection)
+Optimization
+
+Isolation
+Gain
+
+    Testability
+
+    Controlled dependencies
+
+Outcome
+
+    Same runtime behavior
+
+    Flexible refactoring
+
+
+4️⃣ Refactor Without Visibility → Logging Snapshot
+Problem (Before)
+
+No insight into runtime behavior.
+Why Refactoring Is Needed
+
+Hidden behavior causes regressions.
+Before
+processOrder(order);
+After
+logger.info('order_snapshot', serialize(order));
+processOrder(order);
+Refactoring Technique
+
+Behavior Snapshot Logging
+Optimization
+
+Observability
+Gain
+
+    Behavior verification
+
+    Safer refactors
+
+Outcome
+
+    Same execution
+
+    Improved visibility
+
+
+5️⃣ Big Rewrite Risk → Strangler Pattern
+Problem (Before)
+
+Entire module rewritten at once.
+Why Refactoring Is Needed
+
+Large rewrites fail often.
+Before
+legacyCheckout(order);
+After
+if (order.type === 'NEW') {
+  return newCheckout(order);
+}
+return legacyCheckout(order);
+Refactoring Technique
+
+Strangler Pattern
+Optimization
+
+Incremental replacement
+Gain
+
+    Zero downtime refactor
+
+    Gradual migration
+
+Outcome
+
+    Same results
+
+    Controlled transition
+
+6️⃣ Untrusted External API → Anti-Corruption Layer
+Problem (Before)
+
+External API shape leaks into system.
+Why Refactoring Is Needed
+
+External change breaks internal logic.
+Before
+res.json(thirdPartyResponse);
+After
+res.json(mapToInternal(thirdPartyResponse));
+Refactoring Technique
+
+Anti-Corruption Layer
+Optimization
+
+Boundary protection
+Gain
+
+    Internal stability
+
+    Safe external changes
+
+Outcome
+
+    Same response shape
+
+    Internal independence
+
+
+7️⃣ Refactoring Without Tests → Golden Master
+Problem (Before)
+
+Complex output hard to assert manually.
+Why Refactoring Is Needed
+
+Need exact behavior preservation.
+Before
+generateInvoice(data);
+After
+expect(generateInvoice(data))
+  .toMatchSnapshot();
+Refactoring Technique
+
+Golden Master / Snapshot Testing
+Optimization
+
+Behavior locking
+Gain
+
+    Refactor with confidence
+
+    Detect subtle changes
+
+Outcome
+
+    Identical output
+
+    Safe internal changes
+
+
+8️⃣ Mixed Old & New Code → Parallel Implementation
+Problem (Before)
+
+Old logic modified directly.
+Why Refactoring Is Needed
+
+No fallback if logic breaks.
+Before
+calculateDiscount(order);
+After
+const oldResult = oldCalc(order);
+const newResult = newCalc(order);
+assert(oldResult === newResult);
+Refactoring Technique
+
+Parallel Run Validation
+Optimization
+
+Verification before switch
+Gain
+
+    Proof of correctness
+
+    Zero-risk migration
+
+Outcome
+
+    Same results validated
+
+    Safe replacement
+
+
+9️⃣ Untestable Time/Random Logic → Deterministic Control
+Problem (Before)
+
+Uses Date.now or Math.random.
+Why Refactoring Is Needed
+
+Tests unreliable.
+Before
+if (Date.now() > expiry) { ... }
+After
+function checkExpiry(nowProvider) {
+  if (nowProvider.now() > expiry) { ... }
+}
+Refactoring Technique
+
+Control Volatile Dependencies
+Optimization
+
+Determinism
+Gain
+
+    Reliable tests
+
+    Predictable behavior
+
+Outcome
+
+    Same logic
+
+    Test-safe refactor
+
+
+🔟 Refactoring Without Rollback → Versioned Endpoint
+Problem (Before)
+
+API contract changes break clients.
+Why Refactoring Is Needed
+
+Clients cannot migrate instantly.
+Before
+GET /api/orders
+After
+GET /api/v1/orders
+GET /api/v2/orders
+Refactoring Technique
+
+Versioned Interface
+Optimization
+
+Backward compatibility
+Gain
+
+    Safe API evolution
+
+    No client breakage
+
+Outcome
+
+    Same v1 behavior
+
+    New logic isolated
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------
+
+ this is my app give me the code for thihe Task Management & Team Collaboration App
+
+
+const Team = require('../models/team');
+const User = require('../models/user');
+
+exports.createTeam = async (req, res) => {
+  const { name, ownerId } = req.body;
+
+  if (!name || !ownerId) {
+    return res.status(400).json({ error: 'Missing team data' });
+  }
+
+  try {
+    const owner = await User.findById(ownerId);
+    if (!owner) {
+      return res.status(404).json({ error: 'Owner not found' });
+    }
+
+    const team = await Team.create({
+      name,
+      ownerId,
+      members: JSON.stringify([ownerId]) // store members as JSON string
+    });
+
+    res.json(team);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Team creation failed' });
+  }
+};
+
+exports.getTeams = async (req, res) => {
+  try {
+    const teams = await Team.findAll();
+
+    // parse members JSON before sending
+    const formattedTeams = teams.map(t => ({
+      ...t,
+      members: JSON.parse(t.members)
+    }));
+
+    res.json(formattedTeams);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Failed to fetch teams' });
+  }
+};
+
+const User = require('../models/user');
+
+exports.createUser = async (req, res) => {
+  const { name, email } = req.body;
+
+  if (!name || !email) {
+    return res.status(400).json({ error: 'Invalid user data' });
+  }
+
+  try {
+    const existing = await User.findByEmail(email);
+    if (existing) {
+      return res.status(400).json({ error: 'User already exists' });
+    }
+
+    const user = await User.create({
+      name,
+      email,
+      status: 'ACTIVE'
+    });
+
+    res.json(user);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'User creation failed' });
+  }
+};
+
+exports.getUsers = async (req, res) => {
+  try {
+    const users = await User.findAll();
+    res.json(users);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Failed to fetch users' });
+  }
+};
+
+const Task = require('../models/task');
+const User = require('../models/user');
+
+exports.createTask = async (req, res) => {
+  const { title, priority, assignedTo, teamId } = req.body;
+
+  if (!title) {
+    return res.status(400).json({ error: 'Title required' });
+  }
+
+  // Hidden business rule (intentional smell)
+  if (priority === 'HIGH' && !assignedTo) {
+    return res.status(400).json({ error: 'High priority needs assignment' });
+  }
+
+  try {
+    const user = await User.findById(assignedTo);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const task = await Task.create({
+      title,
+      priority,
+      status: 'TODO',
+      assignee_id: assignedTo, 
+      team_id: teamId          
+    });
+
+    res.json(task);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Something went wrong' });
+  }
+};
+
+exports.getTasks = async (req, res) => {
+  const tasks = await Task.findAll();
+  res.json(tasks);
+};
+
+const db = require('../db/knex');
+
+module.exports = {
+  async create(data) {
+    const [id] = await db('tasks').insert(data);
+    return { id, ...data };
+  },
+
+  async findAll() {
+    return db('tasks').select('*');
+  }
+};
+
+const db = require('../db/knex');
+
+module.exports = {
+  // Create a new team
+  async create(data) {
+    const [id] = await db('teams').insert(data); // SQLite returns inserted id
+    return { id, ...data };
+  },
+
+  // Get all teams
+  async findAll() {
+    return db('teams').select('*');
+  },
+
+  // Find a team by ID
+  async findById(id) {
+    return db('teams').where({ id }).first();
+  }
+};
+
+const db = require('../db/knex');
+
+module.exports = {
+    async create(data) {
+        const [id] = await db('users').insert(data);
+        return { id, ...data };
+    },
+
+    async findAll() {
+        return db('users').select('*');
+    },
+
+    async findById(id) {
+        return db('users').where({ id }).first();
+    },
+
+    async findByEmail(email) {
+        return db('users').where({ email }).first();
+    },
+};
+
+
+
+const express = require('express');
+const router = express.Router();
+
+const TaskController = require('../controllers/TaskController');
+const UserController = require('../controllers/UserController');
+const TeamController = require('../controllers/TeamController');
+
+// Users
+router.post('/users', UserController.createUser);
+router.get('/users', UserController.getUsers);
+
+// Teams
+router.post('/teams', TeamController.createTeam);
+router.get('/teams', TeamController.getTeams);
+
+// Tasks
+router.post('/tasks', TaskController.createTask);
+router.get('/tasks', TaskController.getTasks);
+
+module.exports = router;
+
+const express = require('express');
+const routes = require('./routes');
+const app = express();
+
+app.use(express.json());
+app.use('/api', routes);
+
+app.listen(4000, () => {
+  console.log('Server running on 4000');
+});
+
+
+const db = require('./knex');
+
+async function migrate() {
+    // Users table
+    await db.schema.hasTable('users').then(async (exists) => {
+        if (!exists) {
+            await db.schema.createTable('users', (table) => {
+                table.increments('id').primary();
+                table.string('name').notNullable();
+                table.string('email').notNullable().unique();
+                table.string('status').defaultTo('ACTIVE');
+                table.timestamps(true, true);
+            });
+            console.log('Created table: users');
+        }
+    });
+
+    // Teams table
+    await db.schema.hasTable('teams').then(async (exists) => {
+        if (!exists) {
+            await db.schema.createTable('teams', (table) => {
+                table.increments('id').primary();
+                table.string('name').notNullable();
+                table.integer('ownerId').notNullable().references('id').inTable('users'); // add ownerId
+                table.text('members'); // store array as JSON string
+                table.timestamps(true, true);
+            });
+            console.log('Created table: teams');
+        }
+    });
+
+    // Tasks table
+    await db.schema.hasTable('tasks').then(async (exists) => {
+        if (!exists) {
+            await db.schema.createTable('tasks', (table) => {
+                table.increments('id').primary();
+                table.string('title').notNullable();
+                table.text('description');
+                table.integer('assignee_id').references('id').inTable('users');
+                table.integer('team_id').references('id').inTable('teams');
+                table.string('priority').defaultTo('MEDIUM'); // optional: add priority field
+                table.string('status').defaultTo('TODO');     // optional: default task status
+                table.timestamps(true, true);
+            });
+            console.log('Created table: tasks');
+        }
+    });
+
+    console.log('Migration complete.');
+    process.exit(0);
+}
+
+migrate().catch((err) => {
+    console.error('Migration failed:', err);
+    process.exit(1);
+});
+
+const express = require('express');
+const routes = require('./routes');
+const app = express();
+
+app.use(express.json());
+app.use('/api', routes);
+
+app.listen(4000, () => {
+  console.log('Server running on 4000');
+});
+
+
+give me a front end code step by step setup using react and tailwind css cdn which covers all the below concepts a buggy code for the refactor lab internsionally bad code 
+
+MODULE 3 — REACT REFACTORING (UI STABILITY & CHANGE SAFETY)
+
+    Invariant: UI output and behavior must not change
+    Goal: Make UI logic easier to change, test, and reason about
+    Context: React (hooks, components, state, effects)
+
+
+1️⃣ Feature Blob Component → Hook + View
+Problem (Before)
+
+    Component does data fetching, calculations, and rendering
+
+    Any change risks breaking UI
+
+Why Refactoring Is Needed
+
+Feature blob components amplify change and prevent reuse.
+Before
+function Dashboard() {
+  const [orders, setOrders] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    fetch('/api/orders')
+      .then(r => r.json())
+      .then(data => {
+        setOrders(data);
+        setTotal(data.reduce((s, o) => s + o.amount, 0));
+      });
+  }, []);
+
+  return (
+    <>
+      <h1>{total}</h1>
+      {orders.map(o => (
+        <div key={o.id}>{o.amount}</div>
+      ))}
+    </>
+  );
+}
+After
+function Dashboard() {
+  const { orders, total } = useOrders();
+  return <OrderView orders={orders} total={total} />;
+}
+function useOrders() {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/orders')
+      .then(r => r.json())
+      .then(setOrders);
+  }, []);
+
+  const total = orders.reduce((s, o) => s + o.amount, 0);
+  return { orders, total };
+}
+Refactoring Technique
+
+Extract Hook + Extract Component
+Optimization
+
+Separation of decisions from display
+Gain
+
+    Logic reusable
+
+    UI simpler
+
+Outcome
+
+    Same UI output
+
+    Predictable re-renders
+
+
+2️⃣ Derived State → Computed Value
+Problem (Before)
+
+    State duplicated from props or other state
+
+    Risk of desynchronization bugs
+
+Why Refactoring Is Needed
+
+Derived state creates invisible timing issues.
+Before
+const [total, setTotal] = useState(0);
+
+useEffect(() => {
+  setTotal(calcTotal(orders));
+}, [orders]);
+After
+const total = calcTotal(orders);
+Refactoring Technique
+
+Remove Derived State
+Optimization
+
+Single source of truth
+Gain
+
+    No sync bugs
+
+    Fewer renders
+
+Outcome
+
+    Same total displayed
+
+    More predictable behavior
+
+
+3️⃣ Prop Drilling → Context Refactor
+Problem (Before)
+
+    Same props passed through many layers
+
+    Hard to change component tree
+
+Why Refactoring Is Needed
+
+Prop drilling couples unrelated components.
+Before
+<App user={user}>
+  <Page user={user}>
+    <Header user={user} />
+  </Page>
+</App>
+After
+<UserContext.Provider value={user}>
+  <App />
+</UserContext.Provider>
+const user = useContext(UserContext);
+Refactoring Technique
+
+Introduce Context
+Optimization
+
+Dependency localization
+Gain
+
+    Cleaner component APIs
+
+    Easier tree refactors
+
+Outcome
+
+    Same UI
+
+    Fewer prop changes on edits
+
+
+4️⃣ Large Component → Container + Presentational
+Problem (Before)
+
+    UI and logic mixed
+
+    Testing requires browser environment
+
+Why Refactoring Is Needed
+
+Presentation and decisions evolve at different rates.
+Before
+function UserList({ users }) {
+  const active = users.filter(u => u.active);
+  return active.map(u => <div>{u.name}</div>);
+}
+After
+function UserListContainer({ users }) {
+  const active = users.filter(u => u.active);
+  return <UserListView users={active} />;
+}
+Refactoring Technique
+
+Split Container / Presentational
+Optimization
+
+Responsibility isolation
+Gain
+
+    UI testable with plain props
+
+    Logic reusable
+
+Outcome
+
+    Same rendered list
+
+    Smaller diffs
+
+
+5️⃣ Conditional Rendering Explosion → Mapping
+Problem (Before)
+
+    Many if/else blocks
+
+    Adding new case risky
+
+Why Refactoring Is Needed
+
+Conditional UI logic does not scale.
+Before
+if (status === 'loading') return <Spinner />;
+if (status === 'error') return <Error />;
+if (status === 'success') return <Data />;
+After
+const views = {
+  loading: <Spinner />,
+  error: <Error />,
+  success: <Data />
+};
+
+return views[status];
+Refactoring Technique
+
+Replace Conditional with Lookup Map
+Optimization
+
+Extensibility
+Gain
+
+    Easy to add new states
+
+    Cleaner render logic
+
+Outcome
+
+    Same UI per state
+
+    Safer future changes
+
+
+6️⃣ Side Effects in Render → useEffect
+Problem (Before)
+
+    Side effects inside render body
+
+    Causes infinite loops or warnings
+
+Why Refactoring Is Needed
+
+Render must be pure.
+Before
+if (count > 10) {
+  alert('Too high');
+}
+After
+useEffect(() => {
+  if (count > 10) alert('Too high');
+}, [count]);
+Refactoring Technique
+
+Move Side Effect to useEffect
+Optimization
+
+Render purity
+Gain
+
+    Predictable renders
+
+    No React warnings
+
+Outcome
+
+    Same alert behavior
+
+    Stable rendering
+
+
+7️⃣ Inline Logic in JSX → Extract Function
+Problem (Before)
+
+    JSX cluttered with logic
+
+    Hard to scan UI
+
+Why Refactoring Is Needed
+
+JSX should express structure, not logic.
+Before
+<span>{user.age > 18 ? 'Adult' : 'Minor'}</span>
+After
+<span>{getUserLabel(user)}</span>
+function getUserLabel(user) {
+  return user.age > 18 ? 'Adult' : 'Minor';
+}
+Refactoring Technique
+
+Extract Method
+Optimization
+
+Readability
+Gain
+
+    Clear intent
+
+    Easier change
+
+Outcome
+
+    Same label
+
+    Cleaner JSX
+
+
+8️⃣ Multiple useState → useReducer
+Problem (Before)
+
+    Many related state variables
+
+    Update logic scattered
+
+Why Refactoring Is Needed
+
+Related state should change together.
+Before
+const [loading, setLoading] = useState(false);
+const [data, setData] = useState(null);
+const [error, setError] = useState(null);
+After
+const [state, dispatch] = useReducer(reducer, initialState);
+Refactoring Technique
+
+Replace useState with useReducer
+Optimization
+
+State coherence
+Gain
+
+    Explicit transitions
+
+    Fewer bugs
+
+Outcome
+
+    Same UI behavior
+
+    Easier reasoning
+
+
+9️⃣ Repeated Fetch Logic → Custom Hook
+Problem (Before)
+
+    Same fetch logic duplicated
+
+    Inconsistent error handling
+
+Why Refactoring Is Needed
+
+Duplication causes drift.
+Before
+useEffect(() => {
+  fetch(url).then(setData);
+}, []);
+After
+const { data, loading } = useFetch(url);
+Refactoring Technique
+
+Extract Custom Hook
+Optimization
+
+Reuse
+Gain
+
+    Consistent behavior
+
+    Easier maintenance
+
+Outcome
+
+    Same data rendered
+
+    Unified fetch behavior
+
+
+🔟 Hard-Coded Values → Semantic Props
+Problem (Before)
+
+    Magic values in UI
+
+    Meaning unclear
+
+Why Refactoring Is Needed
+
+UI intent must be explicit.
+Before
+<Button size={3} />
+After
+<Button size="large" />
+Refactoring Technique
+
+Replace Magic Values
+Optimization
+
+Semantic clarity
+Gain
+
+    Easier understanding
+
+    Safer changes
+
+Outcome
+
+    Same visual size
+
+    More readable JSX
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

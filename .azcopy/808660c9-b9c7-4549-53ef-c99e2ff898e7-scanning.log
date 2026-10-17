@@ -1,0 +1,20 @@
+2026/10/17 08:40:00 AzcopyVersion  10.32.3
+2026/10/17 08:40:00 OS-Environment  linux
+2026/10/17 08:40:00 OS-Architecture  amd64
+2026/10/17 08:40:00 Log times are in UTC. Local time is 17 Oct 2026 08:40:00
+2026/10/17 08:40:00 File .env was overwritten because the source is more recent than the destination
+2026/10/17 08:40:00 File .gitignore was overwritten because the source is more recent than the destination
+2026/10/17 08:40:00 File doc.txt was overwritten because the source is more recent than the destination
+2026/10/17 08:40:00 File package-lock.json was overwritten because the source is more recent than the destination
+2026/10/17 08:40:00 File package.json was overwritten because the source is more recent than the destination
+2026/10/17 08:40:00 File src/app.js was overwritten because the source is more recent than the destination
+2026/10/17 08:40:00 File src/controllers/TaskController.js was overwritten because the source is more recent than the destination
+2026/10/17 08:40:00 File src/controllers/TeamController.js was overwritten because the source is more recent than the destination
+2026/10/17 08:40:00 File src/controllers/UserController.js was overwritten because the source is more recent than the destination
+2026/10/17 08:40:00 File src/database/task_management.db was overwritten because the source is more recent than the destination
+2026/10/17 08:40:00 File src/routes/index.js was overwritten because the source is more recent than the destination
+2026/10/17 08:40:00 File src/db/knex.js was overwritten because the source is more recent than the destination
+2026/10/17 08:40:00 File src/db/migrations.js was overwritten because the source is more recent than the destination
+2026/10/17 08:40:00 File src/models/task.js was overwritten because the source is more recent than the destination
+2026/10/17 08:40:00 File src/models/team.js was overwritten because the source is more recent than the destination
+2026/10/17 08:40:00 File src/models/user.js was overwritten because the source is more recent than the destination

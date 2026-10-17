@@ -1,0 +1,21 @@
+2026/10/17 09:11:42 AzcopyVersion  10.32.3
+2026/10/17 09:11:42 OS-Environment  linux
+2026/10/17 09:11:42 OS-Architecture  amd64
+2026/10/17 09:11:42 Log times are in UTC. Local time is 17 Oct 2026 09:11:42
+2026/10/17 09:11:42 File .env was skipped because the source has an older LMT than the destination
+2026/10/17 09:11:42 File .gitignore was skipped because the source has an older LMT than the destination
+2026/10/17 09:11:42 File doc.txt was skipped because the source has an older LMT than the destination
+2026/10/17 09:11:42 File package-lock.json was skipped because the source has an older LMT than the destination
+2026/10/17 09:11:42 File package.json was skipped because the source has an older LMT than the destination
+2026/10/17 09:11:42 File src/app.js was skipped because the source has an older LMT than the destination
+2026/10/17 09:11:42 File src/controllers/TaskController.js was skipped because the source has an older LMT than the destination
+2026/10/17 09:11:42 File src/controllers/TeamController.js was skipped because the source has an older LMT than the destination
+2026/10/17 09:11:42 File src/controllers/UserController.js was skipped because the source has an older LMT than the destination
+2026/10/17 09:11:42 File src/database/task_management.db was skipped because the source has an older LMT than the destination
+2026/10/17 09:11:42 File src/db/knex.js was skipped because the source has an older LMT than the destination
+2026/10/17 09:11:42 File src/db/migrations.js was skipped because the source has an older LMT than the destination
+2026/10/17 09:11:42 File src/models/task.js was skipped because the source has an older LMT than the destination
+2026/10/17 09:11:42 File src/models/team.js was skipped because the source has an older LMT than the destination
+2026/10/17 09:11:42 File src/models/user.js was skipped because the source has an older LMT than the destination
+2026/10/17 09:11:42 File src/constants/taskConstants.js was skipped because the source has an older LMT than the destination
+2026/10/17 09:11:42 File src/routes/index.js was skipped because the source has an older LMT than the destination
